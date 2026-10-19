@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VEGAMAN DevKit – Free Online Developer Tools</title>
+<meta name="description" content="Free browser-based developer tools by VEGAMAN: JSON formatter, Base64 encoder/decoder, UUID generator, text analyzer and text compare. Everything runs locally.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<aside class="sidebar" id="sidebar" aria-label="Sidebar">
+  <a class="brand" href="#home"><span class="mark" aria-hidden="true">V</span><span><strong>VEGAMAN</strong><small>DevKit</small></span></a>
+  <label class="sr" for="search">Search tools</label>
+  <input id="search" type="search" placeholder="Search tools…" autocomplete="off">
+  <nav aria-label="Tools"><ul id="nav">
+    <li data-tool="json formatter validator minify"><a href="#json">JSON Formatter</a></li>
+    <li data-tool="base64 encode decode"><a href="#base64">Base64</a></li>
+    <li data-tool="uuid guid generator"><a href="#uuid">UUID Generator</a></li>
+    <li data-tool="text analyzer word count reading time"><a href="#analyzer">Text Analyzer</a></li>
+    <li data-tool="text compare diff"><a href="#compare">Text Compare</a></li>
+  </ul><p id="noMatch" class="muted" hidden>No tools match your search.</p></nav>
+  <a class="about-link" href="#about">About VEGAMAN</a>
+</aside>
+<div class="scrim" id="scrim" hidden></div>
+<div class="shell">
+<header class="topbar">
+  <button id="menuBtn" class="btn icon" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false">☰</button>
+  <span class="topbar-title">VEGAMAN DevKit</span>
+  <button id="themeBtn" class="btn" aria-label="Switch to light theme">Light theme</button>
+</header>
+<main id="main" tabindex="-1">
+
+<section class="panel" id="home">
+  <h1>Developer tools that stay in your browser</h1>
+  <p class="lead">Five free utilities. No sign-up, no uploads. Your input is processed on your device.</p>
+  <div class="cards" id="cards">
+    <a class="card" data-tool="json formatter validator minify" href="#json"><h2>JSON Formatter</h2><p>Validate, format and minify JSON with clear errors.</p></a>
+    <a class="card" data-tool="base64 encode decode" href="#base64"><h2>Base64</h2><p>Encode and decode text, including Unicode.</p></a>
+    <a class="card" data-tool="uuid guid generator" href="#uuid"><h2>UUID Generator</h2><p>Generate 1–100 version 4 UUIDs.</p></a>
+    <a class="card" data-tool="text analyzer word count reading time" href="#analyzer"><h2>Text Analyzer</h2><p>Words, characters, lines and reading time.</p></a>
+    <a class="card" data-tool="text compare diff" href="#compare"><h2>Text Compare</h2><p>See added, removed and unchanged lines.</p></a>
+  </div>
+</section>
+
+<section class="panel" id="json" hidden>
+  <h1>JSON Formatter and Validator</h1>
+  <label for="jsonIn">JSON input</label>
+  <textarea id="jsonIn" rows="10" spellcheck="false" placeholder='Paste JSON here, e.g. {"name":"VEGAMAN"}'></textarea>
+  <div class="row">
+    <button class="btn primary" id="jsonFormat">Format</button>
+    <button class="btn" id="jsonMinify">Minify</button>
+    <button class="btn" id="jsonValidate">Validate</button>
+    <button class="btn" id="jsonSample">Load sample</button>
+    <button class="btn" id="jsonClear">Clear</button>
+  </div>
+  <p class="status" id="jsonStatus" role="status"></p>
+  <label for="jsonOut">Result</label>
+  <textarea id="jsonOut" rows="10" readonly spellcheck="false" placeholder="Formatted or minified JSON appears here."></textarea>
+  <div class="row"><button class="btn" id="jsonCopy">Copy result</button></div>
+</section>
+
+<section class="panel" id="base64" hidden>
+  <h1>Base64 Encoder and Decoder</h1>
+  <p class="note">Base64 is an encoding, not encryption. Anyone can decode it, so never use it to protect secrets.</p>
+  <div class="grid2">
+    <div>
+      <h2>Encode</h2>
+      <label for="b64Plain">Text to encode</label>
+      <textarea id="b64Plain" rows="7" placeholder="Type or paste plain text"></textarea>
+      <div class="row"><button class="btn primary" id="b64Enc">Encode to Base64</button><button class="btn" id="b64Sample">Load sample</button></div>
+    </div>
+    <div>
+      <h2>Decode</h2>
+      <label for="b64Coded">Base64 to decode</label>
+      <textarea id="b64Coded" rows="7" spellcheck="false" placeholder="Paste Base64 text"></textarea>
+      <div class="row"><button class="btn primary" id="b64Dec">Decode to text</button></div>
+    </div>
+  </div>
+  <p class="status" id="b64Status" role="status"></p>
+  <div class="row"><button class="btn" id="b64CopyPlain">Copy text</button><button class="btn" id="b64CopyCoded">Copy Base64</button><button class="btn" id="b64Clear">Clear both</button></div>
+</section>
+
+<section class="panel" id="uuid" hidden>
+  <h1>UUID Generator</h1>
+  <p class="lead">Version 4 UUIDs from your browser's secure random generator.</p>
+  <div class="row">
+    <label for="uuidCount">Quantity (1–100)</label>
+    <input id="uuidCount" type="number" min="1" max="100" value="5" inputmode="numeric">
+    <button class="btn primary" id="uuidGen">Generate</button>
+    <button class="btn" id="uuidCopyAll">Copy all</button>
+    <button class="btn" id="uuidClear">Clear</button>
+  </div>
+  <p class="status" id="uuidStatus" role="status"></p>
+  <ul class="uuids" id="uuidList"></ul>
+  <p class="empty" id="uuidEmpty">No UUIDs yet. Choose a quantity and select Generate.</p>
+</section>
+
+<section class="panel" id="analyzer" hidden>
+  <h1>Text Analyzer</h1>
+  <label for="anaIn">Your text</label>
+  <textarea id="anaIn" rows="9" placeholder="Start typing or paste text. Statistics update as you type."></textarea>
+  <div class="row"><button class="btn" id="anaSample">Load sample</button><button class="btn" id="anaClear">Clear</button></div>
+  <dl class="stats">
+    <div><dt>Words</dt><dd id="stWords">0</dd></div>
+    <div><dt>Characters</dt><dd id="stChars">0</dd></div>
+    <div><dt>Without spaces</dt><dd id="stNoSp">0</dd></div>
+    <div><dt>Lines</dt><dd id="stLines">0</dd></div>
+    <div><dt>Reading time</dt><dd id="stTime">0 min</dd></div>
+  </dl>
+  <p class="muted">Reading time assumes 200 words per minute.</p>
+</section>
+
+<section class="panel" id="compare" hidden>
+  <h1>Text Compare</h1>
+  <div class="grid2">
+    <div><label for="cmpA">Original</label><textarea id="cmpA" rows="9" placeholder="Original text"></textarea></div>
+    <div><label for="cmpB">Changed</label><textarea id="cmpB" rows="9" placeholder="Changed text"></textarea></div>
+  </div>
+  <div class="row">
+    <button class="btn primary" id="cmpRun">Compare</button>
+    <button class="btn" id="cmpSwap">Swap sides</button>
+    <button class="btn" id="cmpSample">Load sample</button>
+    <button class="btn" id="cmpClear">Clear comparison</button>
+  </div>
+  <p class="status" id="cmpStatus" role="status"></p>
+  <div class="diff" id="cmpOut" aria-label="Comparison result"></div>
+  <p class="empty" id="cmpEmpty">Enter two texts and select Compare to see differences.</p>
+</section>
+
+<section class="panel" id="about" hidden>
+  <h1>About VEGAMAN</h1>
+  <p class="lead">VEGAMAN is a technology company building simple, dependable tools for developers.</p>
+  <p>DevKit is version 1 of our free utility collection. It is plain HTML, CSS and JavaScript with no backend, no accounts and no tracking. Every tool runs in your browser, and nothing you enter is sent to a server.</p>
+  <p>The source is open under the MIT license, so you can read it, change it and host it yourself.</p>
+</section>
+</main>
+<footer class="footer">© 2026 VEGAMAN. Released under the MIT License. All processing happens locally in your browser.</footer>
+</div>
+<div id="toasts" class="toasts" aria-live="polite"></div>
+<script src="app.js"></script>
+</body>
+</html>
